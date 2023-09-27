@@ -11,13 +11,13 @@ public class Blade : MonoBehaviour
 
     public GameObject BladeTrailPrefab;
 
-    CircleCollider2D circleCollider;
+    SphereCollider circleCollider;
 
     GameObject CurrentBlade;
 
     Vector2 previousPosition;
 
-    Rigidbody2D rb;
+    Rigidbody rb;
 
     Camera cam;
 
@@ -25,8 +25,8 @@ public class Blade : MonoBehaviour
     private void Start()
     {
         cam = Camera.main;
-        rb = GetComponent<Rigidbody2D>();
-        circleCollider = GetComponent<CircleCollider2D>();
+        rb = GetComponent<Rigidbody>();
+        circleCollider = GetComponent<SphereCollider>();
     }
 
     void Update()
