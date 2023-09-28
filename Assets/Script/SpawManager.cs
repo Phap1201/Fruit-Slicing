@@ -4,13 +4,20 @@ using UnityEngine;
 
 public class SpawManager : MonoBehaviour
 {
+    public static SpawManager instance;
     private Collider spawnArea;
 
     public GameObject[] FruitPrefab;
 
+    public GameObject BombPrefab;
+
+    [Range(0f, 1f)]
+    public float BombChance = 0.05f;
+
     public float minSpawnDelay = .25f;
     public float maxSpawnDelay = 1.0f;
 
+    
     public float minAngle = -10f;
     public float maxAngle = 10f;
 
@@ -20,6 +27,8 @@ public class SpawManager : MonoBehaviour
     public float maxLifetime = 5f;
     private void Awake()
     {
+        if(instance == null)
+            instance = this;
         spawnArea = GetComponent<Collider>();
     }
     private void OnEnable()
@@ -38,6 +47,10 @@ public class SpawManager : MonoBehaviour
         {
             GameObject prefab = FruitPrefab[ Random.Range(0, FruitPrefab.Length) ];
 
+            if(Random.value < BombChance )
+            {
+                prefab = BombPrefab;
+            }    
             Vector3 position = new Vector3();
             position.x = Random.Range(spawnArea.bounds.min.x, spawnArea.bounds.max.x);
             position.y = Random.Range(spawnArea.bounds.min.y, spawnArea.bounds.max.y);

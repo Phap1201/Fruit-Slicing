@@ -11,7 +11,7 @@ public class Blade : MonoBehaviour
 
     public GameObject BladeTrailPrefab;
 
-    SphereCollider circleCollider;
+    Collider circleCollider;
 
     GameObject CurrentBlade;
 
@@ -26,7 +26,7 @@ public class Blade : MonoBehaviour
     {
         cam = Camera.main;
         rb = GetComponent<Rigidbody>();
-        circleCollider = GetComponent<SphereCollider>();
+        circleCollider = GetComponent<Collider>();
     }
 
     void Update()
