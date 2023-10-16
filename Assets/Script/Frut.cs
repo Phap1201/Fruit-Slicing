@@ -6,6 +6,10 @@ public class Frut : MonoBehaviour
 {
     public GameObject FruitSlicedPrefab;
     public DameLogic dameLogic;
+  
+
+  
+    
 
 
 
@@ -17,17 +21,28 @@ public class Frut : MonoBehaviour
     {
         if(other.gameObject.CompareTag("Blade"))
         {
-            GameManager.Instance.AddScore(1);
+            
+            GameManager.Instance.AddScore();
+
             Instantiate(FruitSlicedPrefab,transform.position, Quaternion.identity);
-           
+
             Destroy(gameObject);
+            
         }
         if(other.gameObject.CompareTag("Dame"))
         {
+            if (GameManager.Instance.isEndGame) return;
             Debug.LogError("KiemTraVacham");
             Destroy(this.gameObject);
-            dameLogic.Dame();
-            GameManager.Instance.Expod();
+            dameLogic.Dame();    
+            GameManager.Instance.EndGame();
+           
         }    
+
+      
     }
+    private void Slice(Vector3 direction , Vector3 position , float force)
+    {
+        
+    }    
 }

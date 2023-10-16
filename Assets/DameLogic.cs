@@ -15,7 +15,13 @@ public class DameLogic : MonoBehaviour
             Debug.LogError("Live");
             _lives--;
         }
+        if(_lives ==0)
+        {
+            UiManager.Instance.LoseGame();
+            GameManager.Instance.Expod();
+        }
         UiManager.Instance.UpdateLive(_lives);
+
     }
    
 

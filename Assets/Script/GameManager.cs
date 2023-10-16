@@ -5,9 +5,10 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
-    public int Score;
+    
     protected Blade blade;
-  
+    public bool isPauseGame;
+    public bool isEndGame;
 
     [SerializeField]
 
@@ -25,20 +26,49 @@ public class GameManager : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
-    {
-        
-    }
+   
     public void Expod()
     {
         blade.enabled = false;
         SpawManager.instance.enabled = false;
     }    
-    public void AddScore(int Point)
+    public void AddScore()
     {
-        Score += Point;
-        UiManager.Instance.UpdateScore(Score);
+        DataManager.instance.AddScores();
+        int PlayerScore = DataManager.instance.GetScore();
+        UiManager.Instance.UpdateScore(PlayerScore);
 
+    }
+    public void EndGame()
+    {
+       DataManager.instance.SetBestScore();
+    }    
+    public int GetScores()
+    {
+
+       int PlayerScore=DataManager.instance.GetScore();
+       return PlayerScore;
+    }
+    public void PauseGame()
+    {
+        if (isPauseGame == false)
+        {
+            Pause();
+        }
+        else
+        {
+            Resume();
+        }
+    }
+    void Pause()
+    {
+        isPauseGame = true;
+        Time.timeScale = 0;
+    }
+    void Resume()
+    {
+        isPauseGame = false;
+        Time.timeScale = 1;
     }
 
 }
